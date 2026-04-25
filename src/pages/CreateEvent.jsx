@@ -1,16 +1,23 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function CreateEvent() {
+function CreateEvent({setPlans}) {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     if (!name.trim()) {
       alert("please enter a name");
       return;
     }
-    console.log({ name, date, description });
+    setPlans(prev => [...prev, {
+      name,
+      date,
+      description
+    }]);
+    navigate("/");
     setName("");
     setDate("");
     setDescription("");

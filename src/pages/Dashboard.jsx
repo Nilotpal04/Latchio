@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
-function Dashboard() {
+function Dashboard({plans}) {
   const navigate = useNavigate();
-  const [plans, setPlans] = useState(["Goa Trip", "Club Event", "House Party"]);
 
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-blue-100 to-purple-100">
@@ -56,7 +54,10 @@ function Dashboard() {
                   key={index}
                   className="p-4 bg-white rounded-lg shadow hover:shadow-lg hover:-translate-y-0.5 transition cursor-pointer"
                 >
-                  {plan}
+                  <div>
+                    <p className="font-semibold">{plan.name}</p>
+                    <p className="text-sm text-gray-500">{plan.date}</p>
+                  </div>
                 </div>
               ))}
             </div>
