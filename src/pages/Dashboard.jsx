@@ -49,10 +49,11 @@ function Dashboard({plans}) {
             <h2 className="text-xl font-bold mb-4 text-gray-900">Your Plans</h2>
 
             <div className="space-y-3">
-              {plans.map((plan, index) => (
+              {plans.map((plan) => (
                 <div
-                  key={index}
+                  key={plan.id}
                   className="p-4 bg-white rounded-lg shadow hover:shadow-lg hover:-translate-y-0.5 transition cursor-pointer"
+                  onClick={() => navigate(`/plan/${plan.id}`)}
                 >
                   <div>
                     <p className="font-semibold">{plan.name}</p>

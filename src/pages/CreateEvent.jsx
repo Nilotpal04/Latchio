@@ -12,7 +12,11 @@ function CreateEvent({setPlans}) {
       alert("please enter a name");
       return;
     }
+
+    const id = crypto.randomUUID();
+
     setPlans(prev => [...prev, {
+      id,
       name,
       date,
       description
