@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Dashboard() {
   const navigate = useNavigate();
+  const [plans, setPlans] = useState(["Goa Trip", "Club Event", "House Party"]);
 
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-blue-100 to-purple-100">
-
       <div className="flex justify-between items-center px-6 py-3 backdrop-blur-md bg-gradient-to-r from-blue-500/90 to-purple-500/90 text-white shadow">
         <h1 className="text-lg font-bold tracking-wide">Latchio</h1>
 
@@ -18,10 +19,8 @@ function Dashboard() {
       </div>
 
       <div className="flex flex-1">
-
         <div className="w-64 bg-white/80 backdrop-blur-md p-4 border-r">
           <ul className="space-y-2 text-gray-700">
-
             <li className="px-3 py-2 rounded bg-blue-100 text-blue-600 font-medium">
               All Plans
             </li>
@@ -37,14 +36,11 @@ function Dashboard() {
             <li className="px-3 py-2 rounded hover:bg-gray-100 cursor-pointer">
               Friends
             </li>
-
           </ul>
         </div>
 
         <div className="flex-1 p-8 bg-gray-100">
-
           <div className="max-w-4xl">
-
             <button
               onClick={() => navigate("/create")}
               className="mb-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition"
@@ -52,30 +48,20 @@ function Dashboard() {
               + Create new plan
             </button>
 
-            <h2 className="text-xl font-bold mb-4 text-gray-900">
-              Your Plans
-            </h2>
+            <h2 className="text-xl font-bold mb-4 text-gray-900">Your Plans</h2>
 
             <div className="space-y-3">
-
-              <div className="p-4 bg-white rounded-lg shadow hover:shadow-lg hover:-translate-y-0.5 transition cursor-pointer">
-                Goa Trip
-              </div>
-
-              <div className="p-4 bg-white rounded-lg shadow hover:shadow-lg hover:-translate-y-0.5 transition cursor-pointer">
-                Club Event
-              </div>
-
-              <div className="p-4 bg-white rounded-lg shadow hover:shadow-lg hover:-translate-y-0.5 transition cursor-pointer">
-                House Party
-              </div>
-
+              {plans.map((plan, index) => (
+                <div
+                  key={index}
+                  className="p-4 bg-white rounded-lg shadow hover:shadow-lg hover:-translate-y-0.5 transition cursor-pointer"
+                >
+                  {plan}
+                </div>
+              ))}
             </div>
-
           </div>
-
         </div>
-
       </div>
     </div>
   );
