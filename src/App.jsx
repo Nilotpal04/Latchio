@@ -1,10 +1,12 @@
+import { Routes, Route } from "react-router-dom";
 import CreateEvent from "./pages/CreateEvent";
 
 function App() {
   return (
-    <div>
-      <CreateEvent />
-    </div>
+    <Routes>
+      <Route path="/" element={<h1>Dashboard</h1>} />
+      <Route path="/create" element={<CreateEvent />} />
+    </Routes>
   );
 }
 
