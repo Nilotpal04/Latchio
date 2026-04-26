@@ -9,6 +9,10 @@ function Workspace({ plans }) {
   if (!plan) {
     return <p className="p-6">Plan not found</p>;
   }
+  
+  const [tasks, setTasks] = useState();
+  const [taskInput, setTaskInput] = useState();
+
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-blue-100 to-purple-100">
       <div className="flex justify-between items-center px-6 py-3 bg-gradient-to-r from-blue-200/90 to-purple-200/90 shadow">
@@ -79,8 +83,27 @@ function Workspace({ plans }) {
 
           {activeTab === "tasks" && (
             <div>
-              <h2 className="text-xl font-semibold">Tasks</h2>
-              <p className="text-gray-500">No tasks yet</p>
+              <h2 className="text-xl font-semibold mb-3">Tasks</h2>
+              
+              <div className="flex gap-2 mb-4">
+                <input
+                 type="text"
+                 placeholder="Add a task..."
+                 value={taskInput}
+                 onChange={(e) => setTaskInput(e.target.value)}
+                 className="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                 />
+
+                 <button onClick={() => {
+                  if (!taskInput.trim()) return;
+                  setTasks((prev) => [...prev, { text: taskInput, done: false}]);
+                  setTaskInput("");
+                 }}
+                 className="bg-blue-500 text-white px-4 rounded hover:bg-blue-600"
+                 >
+                  Add
+                 </button>
+              </div>
             </div>
           )}
 
