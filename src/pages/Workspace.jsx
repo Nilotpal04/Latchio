@@ -110,8 +110,43 @@ function Workspace({ plans }) {
               </div>
               <div className="space-y-2">
                 {tasks.map((task, index) => (
-                  <div key={index} className="p-3 bg-white rounded shadow">
-                    {task.text}
+                  <div
+                    key={index}
+                    className="p-3 bg-white rounded shadow flex justify-between items-center"
+                  >
+                    <span
+                      className={`${
+                        task.done ? "line-through opacity-50" : ""
+                      }`}
+                    >
+                      {task.text}
+                    </span>
+
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => {
+                          setTasks((prev) =>
+                            prev.map((t, i) =>
+                              i === index ? { ...t, done: !t.done } : t,
+                            ),
+                          );
+                        }}
+                        className="text-green-600 hover:scale-110 transition"
+                      >
+                        ✔
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          setTasks((prev) =>
+                            prev.filter((_, i) => i !== index),
+                          );
+                        }}
+                        className="text-red-500 hover:scale-110 transition"
+                      >
+                        🗑
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
