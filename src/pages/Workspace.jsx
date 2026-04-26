@@ -9,9 +9,9 @@ function Workspace({ plans }) {
   if (!plan) {
     return <p className="p-6">Plan not found</p>;
   }
-  
-  const [tasks, setTasks] = useState();
-  const [taskInput, setTaskInput] = useState();
+
+  const [tasks, setTasks] = useState([]);
+  const [taskInput, setTaskInput] = useState("");
 
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-blue-100 to-purple-100">
@@ -84,25 +84,36 @@ function Workspace({ plans }) {
           {activeTab === "tasks" && (
             <div>
               <h2 className="text-xl font-semibold mb-3">Tasks</h2>
-              
+
               <div className="flex gap-2 mb-4">
                 <input
-                 type="text"
-                 placeholder="Add a task..."
-                 value={taskInput}
-                 onChange={(e) => setTaskInput(e.target.value)}
-                 className="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                 />
+                  type="text"
+                  placeholder="Add a task..."
+                  value={taskInput}
+                  onChange={(e) => setTaskInput(e.target.value)}
+                  className="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
 
-                 <button onClick={() => {
-                  if (!taskInput.trim()) return;
-                  setTasks((prev) => [...prev, { text: taskInput, done: false}]);
-                  setTaskInput("");
-                 }}
-                 className="bg-blue-500 text-white px-4 rounded hover:bg-blue-600"
-                 >
+                <button
+                  onClick={() => {
+                    if (!taskInput.trim()) return;
+                    setTasks((prev) => [
+                      ...prev,
+                      { text: taskInput, done: false },
+                    ]);
+                    setTaskInput("");
+                  }}
+                  className="bg-blue-500 text-white px-4 rounded hover:bg-blue-600"
+                >
                   Add
-                 </button>
+                </button>
+              </div>
+              <div className="space-y-2">
+                {tasks.map((task, index) => (
+                  <div key={index} className="p-3 bg-white rounded shadow">
+                    {task.text}
+                  </div>
+                ))}
               </div>
             </div>
           )}
