@@ -61,6 +61,41 @@ function Workspace({ plans }) {
             Expenses
           </button>
         </div>
+        <div className="flex-1 p-6 bg-gray-100">
+          {activeTab === "overview" && (
+            <div>
+              <h2 className="text-xl font-semibold mb-2">Overview</h2>
+              <p className="text-gray-700">Date: {plan.date}</p>
+              <p className="text-gray-600">{plan.description}</p>
+            </div>
+          )}
+
+          {activeTab === "decisions" && (
+            <div>
+              <h2 className="text-xl font-semibold">Desicions</h2>
+              <p className="text-gray-500">No decisions yet</p>
+            </div>
+          )}
+
+          {activeTab === "tasks" && (
+            <div>
+              <h2 className="text-xl font-semibold">Tasks</h2>
+              <p className="text-gray-500">No tasks yet</p>
+            </div>
+          )}
+
+          {activeTab === "expenses" && (
+            <div>
+              <h2 className="text-xl font-semibold">Expenses</h2>
+              <p className="text-gray-500">No expenses yet</p>
+            </div>
+          )}
+        </div>
+
+        <div className="w-56 bg-white border-l p-4">
+          <h3 className="font-semibold mb-2">Members</h3>
+          <p className="text-gray-500 text-sm">Coming soon...</p>
+        </div>
       </div>
     </div>
   );
