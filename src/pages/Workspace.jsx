@@ -10,7 +10,15 @@ function Workspace({ plans }) {
     return <p className="p-6">Plan not found</p>;
   }
 
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem(`tasks-${id}`);
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem(`tasks-${id}`, JSON.stringify(tasks));
+  }, [tasks, id]);
+  
   const [taskInput, setTaskInput] = useState("");
 
   return (
