@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Workspace({ plans }) {
   const { id } = useParams();
@@ -15,10 +15,13 @@ function Workspace({ plans }) {
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
 
+  const completedTasks = tasks.filter((task) => task.done).length;
+  const totalTasks = tasks.length;
+
   useEffect(() => {
     localStorage.setItem(`tasks-${id}`, JSON.stringify(tasks));
   }, [tasks, id]);
-  
+
   const [taskInput, setTaskInput] = useState("");
 
   return (
@@ -33,7 +36,7 @@ function Workspace({ plans }) {
         <h1 className="text-lg font-bold">{plan.name}</h1>
         <button className="bg-blue-500 text-white px-4 py1 rounded">
           Invite
-        </button>
+        </button> 
       </div>
 
       <div className="flex flex-1">
@@ -92,6 +95,9 @@ function Workspace({ plans }) {
           {activeTab === "tasks" && (
             <div>
               <h2 className="text-xl font-semibold mb-3">Tasks</h2>
+              <p className="text-sm text-gray-500 font-semibold mb-1">
+                {completedTasks}/{totalTasks} tasks completed
+              </p>
 
               <div className="flex gap-2 mb-4">
                 <input
