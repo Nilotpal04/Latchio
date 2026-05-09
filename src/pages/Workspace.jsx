@@ -15,6 +15,8 @@ function Workspace({ plans }) {
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
 
+  const [decisions, setDecisions] = useState([]);
+
   const completedTasks = tasks.filter((task) => task.done).length;
   const totalTasks = tasks.length;
 
@@ -23,6 +25,8 @@ function Workspace({ plans }) {
   }, [tasks, id]);
 
   const [taskInput, setTaskInput] = useState("");
+  const [decisionInput, setDecisionInput] = useState("");
+  const [optionInputs, setOptionInputs] = useState({});
 
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-blue-100 to-purple-100">
@@ -87,8 +91,47 @@ function Workspace({ plans }) {
 
           {activeTab === "decisions" && (
             <div>
-              <h2 className="text-xl font-semibold">Desicions</h2>
+              <h2 className="text-xl font-semibold">Decisions</h2>
               <p className="text-gray-500">No decisions yet</p>
+
+              <div className="flex gap-2 mb-4">
+                <input
+                  type="text"
+                  placeholder="Make a decision..."
+                  value={decisionInput}
+                  onChange={(e) => setDecisionInput(e.target.value)}
+                  className="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+
+                <button
+                  onClick={() => {
+                    if (!decisionInput.trim()) return;
+                    const id = crypto.randomUUID();
+                    setDecisions((prev) => [...prev, { id, question: decisionInput , options:[]}]);
+                    setDecisionInput("");
+                  }}
+                  className="bg-blue-500 text-white px-4 rounded hover:bg-blue-600"
+                >
+                  Add
+                </button>
+              </div>
+              <div className="space-y-2">
+                {decisions.map((dec, index) => (
+                  <div key={index} className="p-3 rounded shadow bg-white flex justify-between items-center">
+                    <span>
+                      {dec.question}
+                    </span>
+
+                    <input
+                      type="text"
+                      placeholder="Add options..."
+                      value={optionInputs[dec.id]}
+                      onChange={(e) => setOptionInputs({...optionInputs, [dec.id]: (e.target.value)})}
+                      className="flex-1 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 ml-4"
+                    />
+                    </div>
+                ))}
+             </div>               
             </div>
           )}
 
