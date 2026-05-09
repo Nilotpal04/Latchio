@@ -36,7 +36,7 @@ function Workspace({ plans }) {
         <h1 className="text-lg font-bold">{plan.name}</h1>
         <button className="bg-blue-500 text-white px-4 py1 rounded">
           Invite
-        </button> 
+        </button>
       </div>
 
       <div className="flex flex-1">
@@ -126,11 +126,13 @@ function Workspace({ plans }) {
                 {tasks.map((task, index) => (
                   <div
                     key={index}
-                    className="p-3 bg-white rounded shadow flex justify-between items-center"
+                    className={`p-3 rounded shadow flex justify-between items-center transition ${
+                      task.done ? "bg-gray-200/60 opacity-70" : "bg-white"
+                    }`}
                   >
                     <span
                       className={`${
-                        task.done ? "line-through opacity-50" : ""
+                        task.done ? "line-through opacity-50" : "bg-white"
                       }`}
                     >
                       {task.text}
